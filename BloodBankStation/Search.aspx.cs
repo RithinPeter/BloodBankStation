@@ -71,6 +71,25 @@ namespace BloodBankStation
         {
             Response.Redirect("AddLocation.aspx");
         }
+        protected void btnDetails_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            GridViewRow row = (GridViewRow)btn.NamingContainer;
+
+            // Find the controls within the GridView row to get the values
+            Label btnDetails = (Label)row.FindControl("btnDetails"); // Assuming you have a label with ID "lblId" for the ID
+
+            if (btnDetails != null)
+            {
+                // Get the ID value from the label
+                int id;
+                if (int.TryParse(btnDetails.Text, out id))
+                {
+                    // Redirect to details page with the ID as a query string
+                    Response.Redirect("Details.aspx?id=" + id);
+                }
+            }
+        }
 
     }
 
