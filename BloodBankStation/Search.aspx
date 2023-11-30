@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="BloodBankStation.Search" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="BloodBankStation.Search" Async="true"%>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,9 +48,9 @@
             <br /><br />
             <asp:GridView ID="gvBloodBanks" runat="server" AutoGenerateColumns="False" CssClass="table table-striped">
                 <Columns>
-                    <asp:BoundField DataField="Name" HeaderText="Blood Bank Name" />
+                    <asp:BoundField DataField="City" HeaderText="City" />
                     <asp:BoundField DataField="Address" HeaderText="Address" />
-                    <asp:BoundField DataField="Distance" HeaderText="Distance" />
+                    <asp:BoundField DataField="Phone" HeaderText="Contact" />
                 </Columns>
             </asp:GridView>
         </div>

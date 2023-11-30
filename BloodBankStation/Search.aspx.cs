@@ -1,15 +1,53 @@
 ﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-// Include any other namespaces needed for your data access
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using BloodBankStation.Models;
+using System.Configuration;
+using BloodBankStation.GlobalValues;
+using System.Collections.Generic;
 
 namespace BloodBankStation
 {
     public partial class Search : Page
     {
+        private static readonly HttpClient client = new HttpClient();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Initial page load logic here
+            if (!IsPostBack)
+            {
+                BindDataToGridView();
+            }
+        }
+
+        private async void BindDataToGridView()
+        {
+            var data = await GetDataAsync(); 
+            gvBloodBanks.DataSource = data;
+            gvBloodBanks.DataBind();
+        }
+
+        private async Task<List<ClinicLocations>> GetDataAsync()
+        {
+            client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
+
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + "api/ClinicLocations"; 
+            var response = await client.GetAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+                var clinicLocations = JsonConvert.DeserializeObject<List<ClinicLocations>>(responseContent);
+                return clinicLocations;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
