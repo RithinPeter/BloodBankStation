@@ -51,6 +51,15 @@ namespace BloodBankStation
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblContact;
 
         /// <summary>
+        /// lblSunday control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSunday;
+
+        /// <summary>
         /// lblMonday control.
         /// </summary>
         /// <remarks>
@@ -103,14 +112,5 @@ namespace BloodBankStation
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSaturday;
-
-        /// <summary>
-        /// lblSunday control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblSunday;
     }
 }

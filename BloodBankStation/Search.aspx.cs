@@ -9,6 +9,7 @@ using BloodBankStation.Models;
 using System.Configuration;
 using BloodBankStation.GlobalValues;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BloodBankStation
 {
@@ -28,11 +29,13 @@ namespace BloodBankStation
         {
             var data = await GetDataAsync(); 
             gvBloodBanks.DataSource = data;
+            gvBloodBanks.DataKeyNames = new string[] { "Id" };
             gvBloodBanks.DataBind();
         }
 
         private async Task<List<ClinicLocations>> GetDataAsync()
         {
+            client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
 
             string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + "api/ClinicLocations"; 
@@ -50,21 +53,49 @@ namespace BloodBankStation
             }
         }
 
-        protected void btnSearch_Click(object sender, EventArgs e)
+        protected async void btnSearch_Click(object sender, EventArgs e)
         {
-            string location = txtLocation.Text;
-            // Implement your search logic here
-            // For example, query a database or API to find nearby blood banks
+            Page.RegisterAsyncTask(new PageAsyncTask(async () =>
+            {
+                string location = txtLocation.Text;
+                var data = await GetDataAsync();
 
-            // Bind the results to gvBloodBanks
-            // gvBloodBanks.DataSource = yourDataSource;
-            // gvBloodBanks.DataBind();
+                if (data != null)
+                {
+                    gvBloodBanks.DataSource = new List<ClinicLocations>();
+                    if (!string.IsNullOrEmpty(location))
+                    {
+                        data = data.Where(d => d.City.ToLower().Contains(location.ToLower())).ToList();
+                    }
+
+                    data = data.OrderBy(d => d.Address).ToList();
+                    gvBloodBanks.DataSource = data;
+                    gvBloodBanks.DataKeyNames = new string[] { "Id" };
+                    gvBloodBanks.DataBind();
+                }
+            }));
         }
+
+        private async void SearchValues( string location)
+        {
+            var data = await GetDataAsync();
+
+            if (data != null)
+            {
+                gvBloodBanks.DataSource = new List<ClinicLocations>();
+                if (!string.IsNullOrEmpty(location))
+                {
+                    data = data.Where(d => d.City.ToLower().Contains(location.ToLower())).ToList();
+                }
+
+                data = data.OrderBy(d => d.Address).ToList();
+                gvBloodBanks.DataSource = data;
+                gvBloodBanks.DataBind();
+            }
+        }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            // Implement your logout logic here
-            // This could involve clearing session data, etc.
-
             Response.Redirect("Default.aspx");  
         }
         protected void btnAddLocation_Click( object sender, EventArgs e)
@@ -76,19 +107,14 @@ namespace BloodBankStation
             Button btn = (Button)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
 
-            // Find the controls within the GridView row to get the values
-            Label btnDetails = (Label)row.FindControl("btnDetails"); // Assuming you have a label with ID "lblId" for the ID
+            // Fetching the index passed as CommandArgument
+            int rowIndex = Convert.ToInt32(btn.CommandArgument);
 
-            if (btnDetails != null)
-            {
-                // Get the ID value from the label
-                int id;
-                if (int.TryParse(btnDetails.Text, out id))
-                {
-                    // Redirect to details page with the ID as a query string
-                    Response.Redirect("Details.aspx?id=" + id);
-                }
-            }
+            // Accessing the ID value from DataKeys collection using the row index
+            int id = Convert.ToInt32(gvBloodBanks.DataKeys[rowIndex].Value);
+
+            // Redirect to details page with the ID as a query string
+            Response.Redirect("Details.aspx?id=" + id);
         }
 
     }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="BloodBankStation.Details" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Details.aspx.cs" Inherits="BloodBankStation.Details" Async="true" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -57,6 +57,11 @@
             <h3>Opening Hours:</h3>
 
             <div class="section">
+                <span class="section-label">Sunday:</span>
+                <span class="section-value" id="lblSunday" runat="server"></span>
+            </div>
+
+            <div class="section">
                 <span class="section-label">Monday:</span>
                 <span class="section-value" id="lblMonday" runat="server"></span>
             </div>
@@ -84,11 +89,6 @@
             <div class="section">
                 <span class="section-label">Saturday:</span>
                 <span class="section-value" id="lblSaturday" runat="server"></span>
-            </div>
-
-            <div class="section">
-                <span class="section-label">Sunday:</span>
-                <span class="section-value" id="lblSunday" runat="server"></span>
             </div>
         </div>
     </form>
