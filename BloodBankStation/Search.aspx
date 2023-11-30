@@ -158,7 +158,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="top-right-buttons">
-            <asp:Button ID="btnAddLocation" runat="server" Text="Add Location" CssClass="button add-location-button" OnClick="btnAddLocation_Click" />
+            <asp:Button ID="btnAddLocation" runat="server" Text="Add Location" CssClass="button add-location-button" OnClick="btnProfile_Click" />
             <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="button logout-button" OnClick="btnLogout_Click" />
         </div>
         <div>
@@ -167,7 +167,7 @@
             </h2>
             <div class="input-container">
                 <asp:Label ID="lblSearch" runat="server" Text="Enter your location:"></asp:Label>
-                <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtLocation" runat="server" Placeholder="Enter the City" CssClass="form-control" ></asp:TextBox>
                 <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn-search" OnClick="btnSearch_Click" />
             </div>
 

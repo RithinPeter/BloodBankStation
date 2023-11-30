@@ -98,9 +98,9 @@ namespace BloodBankStation
         {
             Response.Redirect("Default.aspx");  
         }
-        protected void btnAddLocation_Click( object sender, EventArgs e)
+        protected void btnProfile_Click( object sender, EventArgs e)
         {
-            Response.Redirect("AddLocation.aspx");
+            Response.Redirect("Profile.aspx");
         }
         protected void btnDetails_Click(object sender, EventArgs e)
         {
