@@ -22,7 +22,7 @@
             border-radius: 20px;
             /* Adjust the border-radius to make the edges more curved */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            background-color: azure;
+            background-color: lightyellow;
         }
 
         h2 {
@@ -44,12 +44,15 @@
              border: 1px solid #ccc;
              border-radius: 20px; /* Increased border-radius for curved sides */
              box-sizing: border-box;
-}
-
+       }
+        .button-container {
+            display: flex;
+            justify-content: space-around; /* This will space the buttons evenly */
+        }
 
         .submit-button {
-            width: 100%;
-            background-color: red;
+            width: 50%;
+            background-color: lightgreen;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -58,6 +61,17 @@
             font-size: 16px;
             transition: background-color 0.3s;
         }
+        .submit1-button {
+            width: 50%;
+            background-color: orangered;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+}
 
         .submit-button:hover {
             background-color: #0056b3;
@@ -116,7 +130,10 @@
                 <asp:TextBox ID="password" runat="server" TextMode="Password" />
             </div>
 
+            <div class="button-container">
             <asp:Button ID="submit" runat="server" Text="Update Profile" CssClass="submit-button" OnClick="UpdateProfile_Click" />
+            <asp:Button ID="sumbit" runat="server" Text="Delete Profile" CssClass="submit1-button" OnClick="DeleteProfile_Click" />
+        </div>
         </div>
     </form>
 </body>

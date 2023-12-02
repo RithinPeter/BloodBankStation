@@ -123,7 +123,7 @@
         }
 
         .add-location-button {
-            background-color: #28a745;
+            background-color: deepskyblue;
         }
 
             .add-location-button:hover {
@@ -131,7 +131,7 @@
             }
 
         .logout-button {
-            background-color: #007bff;
+            background-color: orange;
         }
 
             .logout-button:hover {
@@ -158,7 +158,7 @@
 <body>
     <form id="form1" runat="server">
         <div class="top-right-buttons">
-            <asp:Button ID="btnAddLocation" runat="server" Text="Add Location" CssClass="button add-location-button" OnClick="btnProfile_Click" />
+            <asp:Button ID="btnAddLocation" runat="server" Text="Profile" CssClass="button add-location-button" OnClick="btnProfile_Click" />
             <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="button logout-button" OnClick="btnLogout_Click" />
         </div>
         <div>

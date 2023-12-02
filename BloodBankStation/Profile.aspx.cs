@@ -173,6 +173,11 @@ namespace BloodBankStation
             var response = await Extensions.PatchAsync(client, apiUrl, content);
             
         }
+
+        public void DeleteProfile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

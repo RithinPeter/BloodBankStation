@@ -32,10 +32,27 @@
         .section-value {
             margin-top: 5px;
         }
+        .go-back-button {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.go-back-button:hover {
+    background-color: #0056b3;
+}
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <a href="Search.aspx" class="go-back-button">Go Back</a>       
         <div class="container">
             <h2>Blood Bank Details</h2>
             
