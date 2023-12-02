@@ -162,16 +162,45 @@ namespace BloodBankStation
         /// <returns></returns>
         private async Task SendPatchRequest(User user)
         {
-            // Create a JsonPatchDocument
+            // Create a JsonPatchDocument 
             var patchDoc = new JsonPatchDocument<User>();
-            
-            string json = JsonConvert.SerializeObject(patchDoc);
+
+            // Compare the user object with the existing user data
+            if (user.FirstName != null)
+            {
+                patchDoc.Replace(x => x.FirstName, user.FirstName);
+            }
+
+            if (user.LastName != null)
+            {
+                patchDoc.Replace(x => x.LastName, user.LastName);
+            }
+
+            if (user.Username != null)
+            {
+                patchDoc.Replace(x => x.Username, user.Username);
+            }
+
+            if (user.Password != null)
+            {
+                patchDoc.Replace(x => x.Password, user.Password);
+            }
+
+            // Serialize the JsonPatchDocument to JSON
+            var json = JsonConvert.SerializeObject(patchDoc);
             var content = new StringContent(json, Encoding.UTF8, "application/json-patch+json");
 
             string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{user.Id}";
-
             var response = await Extensions.PatchAsync(client, apiUrl, content);
-            
+
+            if (response.IsSuccessStatusCode)
+            {
+                // success
+            }
+            else
+            {
+                // error
+            }
         }
 
         public void DeleteProfile_Click(object sender, EventArgs e)
