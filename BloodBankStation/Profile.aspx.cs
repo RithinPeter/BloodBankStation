@@ -152,7 +152,14 @@ namespace BloodBankStation
 
             var response = await client.PutAsync(apiUrl, content);
 
-            // Alert message
+            if (response.IsSuccessStatusCode)
+            {
+                ShowAlert("Profile updateed successfully.");
+            }
+            else
+            {
+                ShowAlert("Error occurred while updating profile.");
+            }
         }
 
         /// <summary>
@@ -191,21 +198,49 @@ namespace BloodBankStation
             var content = new StringContent(json, Encoding.UTF8, "application/json-patch+json");
 
             string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{user.Id}";
-            var response = await Extensions.PatchAsync(client, apiUrl, content);
+            var response = await client.PatchAsync(apiUrl, content);
 
             if (response.IsSuccessStatusCode)
             {
-                // success
+                ShowAlert("Profile updateed successfully.");
             }
             else
             {
-                // error
+                ShowAlert("Error occurred while updating profile.");
             }
         }
 
-        public void DeleteProfile_Click(object sender, EventArgs e)
+        public async void DeleteProfile_Click(object sender, EventArgs e)
         {
+            // Ensure that the User ID is available
+            if (!int.TryParse(userId.Value, out int userIdInt))
+            {
+                return;
+            }
 
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
+
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{userIdInt}";
+
+            // Send a DELETE request
+            var response = await client.DeleteAsync(apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                ShowAlert("Profile deleted successfully.");
+                Response.Redirect("Default.aspx");
+            }
+            else
+            {
+                ShowAlert("Error occurred while deleting profile.");
+            }
+        }
+
+        private void ShowAlert(string message)
+        {
+            string script = $"alert('{message}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
     }
 }

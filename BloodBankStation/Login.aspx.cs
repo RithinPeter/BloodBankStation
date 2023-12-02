@@ -32,7 +32,7 @@ namespace BloodBankStation
             }
             else
             {
-                // Show error message on the page
+                ShowAlert("No user found.");
             }
         }
 
@@ -51,7 +51,7 @@ namespace BloodBankStation
             var response = await client.PostAsync(apiUrl, data);
 
 
-            if (response.IsSuccessStatusCode)
+            if (response.StatusCode == HttpStatusCode.OK)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var loginResponse = JsonConvert.DeserializeObject<User>(responseContent);
@@ -63,8 +63,14 @@ namespace BloodBankStation
             }
             else
             {
-                return false; // or handle the error as needed
+                return false; 
             }
+        }
+
+        private void ShowAlert(string message)
+        {
+            string script = $"alert('{message}');";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alertMessage", script, true);
         }
     }
 }
