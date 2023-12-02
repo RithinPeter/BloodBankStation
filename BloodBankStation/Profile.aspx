@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="BloodBankStation.Profile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="BloodBankStation.Profile" Async="true"%>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -94,25 +94,21 @@
         <div class="form-container">
             <h2><i class="fas fa-user"></i> Update Profile</h2>
 
+            <asp:HiddenField ID="userId" runat="server" />
 
             <div class="textbox-row">
                 <label for="firstName"><i class="fas fa-user"></i>First Name:</label>
-                <asp:TextBox ID="firstName" runat="server" ReadOnly="true" />
+                <asp:TextBox ID="firstName" runat="server" />
             </div>
 
             <div class="textbox-row">
                 <label for="lastName"><i class="fas fa-user"></i>Last Name:</label>
-                <asp:TextBox ID="lastName" runat="server" ReadOnly="true" />
+                <asp:TextBox ID="lastName" runat="server"/>
             </div>
 
             <div class="textbox-row">
                 <label for="username"><i class="fas fa-envelope "></i>Email:</label>
-                <asp:TextBox ID="username" runat="server" ReadOnly="true" />
-            </div>
-
-            <div class="textbox-row">
-                <label for="phoneNumber"><i class="fas fa-mobile"></i>Phone Number:</label>
-                <asp:TextBox ID="phoneNumber" runat="server" ReadOnly="true" />
+                <asp:TextBox ID="username" runat="server" />
             </div>
 
             <div class="textbox-row">

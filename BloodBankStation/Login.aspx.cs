@@ -57,6 +57,8 @@ namespace BloodBankStation
                 var loginResponse = JsonConvert.DeserializeObject<User>(responseContent);
                 // Storing the API key 
                 GlobalData.APIKey = loginResponse.ApiKey;
+                GlobalData.userId = loginResponse.Id;
+
                 return true;
             }
             else
