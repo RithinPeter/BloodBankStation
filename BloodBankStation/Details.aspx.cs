@@ -56,7 +56,7 @@ namespace BloodBankStation
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
 
-            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/ClinicLocations?id={id}";
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/ClinicLocations?id={id}&apikey=" + ConfigurationManager.AppSettings["GAPIKey"];
             var response = await client.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)

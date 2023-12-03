@@ -38,7 +38,7 @@ namespace BloodBankStation
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
 
-            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + "api/ClinicLocations"; 
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + "api/ClinicLocations?apikey=" + ConfigurationManager.AppSettings["GAPIKey"]; 
             var response = await client.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -107,13 +107,10 @@ namespace BloodBankStation
             Button btn = (Button)sender;
             GridViewRow row = (GridViewRow)btn.NamingContainer;
 
-            // Fetching the index passed as CommandArgument
             int rowIndex = Convert.ToInt32(btn.CommandArgument);
 
-            // Accessing the ID value from DataKeys collection using the row index
             int id = Convert.ToInt32(gvBloodBanks.DataKeys[rowIndex].Value);
 
-            // Redirect to details page with the ID as a query string
             Response.Redirect("Details.aspx?id=" + id);
         }
 

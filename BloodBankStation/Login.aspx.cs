@@ -46,8 +46,8 @@ namespace BloodBankStation
 
             var json = JsonConvert.SerializeObject(credentials);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + "api/Users/login";
+            
+            var apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + "api/Users/login?apikey=" + ConfigurationManager.AppSettings["GAPIKey"];
             var response = await client.PostAsync(apiUrl, data);
 
 

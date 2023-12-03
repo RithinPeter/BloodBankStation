@@ -33,7 +33,7 @@ namespace BloodBankStation
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
 
-            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{GlobalData.userId}";
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{GlobalData.userId}?apikey=" + ConfigurationManager.AppSettings["GAPIKey"];
             var response = await client.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)
@@ -75,7 +75,7 @@ namespace BloodBankStation
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
 
-            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{GlobalData.userId}";
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{GlobalData.userId}?apikey=" + ConfigurationManager.AppSettings["GAPIKey"];
             var response = await client.GetAsync(apiUrl);
             var responseContent = await response.Content.ReadAsStringAsync();
             var existingUser = JsonConvert.DeserializeObject<User>(responseContent);
@@ -148,7 +148,7 @@ namespace BloodBankStation
             string json = JsonConvert.SerializeObject(user);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{user.Id}";
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{user.Id}?apikey=" + ConfigurationManager.AppSettings["GAPIKey"];
 
             var response = await client.PutAsync(apiUrl, content);
 
@@ -197,7 +197,7 @@ namespace BloodBankStation
             var json = JsonConvert.SerializeObject(patchDoc);
             var content = new StringContent(json, Encoding.UTF8, "application/json-patch+json");
 
-            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{user.Id}";
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{user.Id}?apikey=" + ConfigurationManager.AppSettings["GAPIKey"];
             var response = await client.PatchAsync(apiUrl, content);
 
             if (response.IsSuccessStatusCode)
@@ -221,7 +221,7 @@ namespace BloodBankStation
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("User-Key", GlobalData.APIKey);
 
-            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{userIdInt}";
+            string apiUrl = ConfigurationManager.AppSettings["ApiBaseUrl"] + $"api/Users/{userIdInt}?apikey=" + ConfigurationManager.AppSettings["GAPIKey"];
 
             // Send a DELETE request
             var response = await client.DeleteAsync(apiUrl);
